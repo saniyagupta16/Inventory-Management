@@ -1,0 +1,97 @@
+
+<div class="col-lg-offset-2 col-lg-8"  ng-init="show='view'">
+    <div class="btn-group" role="group" >
+        <button ng-click="show='view'" type="button" class="btn btn-default">View Users</button>
+        <button ng-click="show='add'" type="button" class="btn btn-default">Add User</button>
+    </div>
+    <div class="view users" ng-if="show=='view'">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Email ID</th>
+                <th>Password</th>
+                <th>Role</th>
+                <th>Created At Date</th>
+                <th style="width:90px"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr ng-repeat ="userDetail in user">
+                <td>{{userDetail.email}}</td>
+                <td>{{userDetail.password}}</td>
+                <td>{{userDetail.role}}</td>
+                <td>{{userDetail.created}}</td>
+
+                <td>
+                    <div>
+                        <button class="btn btn-danger" ng-click="deleteUser(userDetail.id);">Delete</button>
+                    </div>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="add" ng-if="show=='add'">
+        <form id="addUser" method="post" ng-submit="addUser(userInfo);">
+            Email ID:<br><input type="text" name="email" ng-model="userInfo.email">
+            <br>
+            Password:
+            <br>
+            <input type="password" name="password" ng-model="userInfo.password">
+            <br>
+            Role:
+            <br>
+            <select ng-model="userInfo.role" ng-options="x for x in roles">
+            </select>
+            <!--input type="text" name="role" ng-model="userInfo.role"-->
+            <br>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <!--<div id="editForm" ng-if="show=='edit'" >-->
+        <!--<div class="modal-header">-->
+            <!--<h3>Edit Inventory</h3>-->
+        <!--</div>-->
+        <!--<form id="edit" method="post" ng-submit="editInventory(invDetail);">-->
+            <!--<div class="modal-body">-->
+                <!--Item Name:<br><input type="text" name="name" ng-model="invDetail.name">-->
+                <!--<abr>-->
+                <!--Unit of Measurement:-->
+                <!--<br>-->
+                <!--<input type="text" name="unit_of_measurement" ng-model="invDetail.unit_of_measurement">-->
+                <!--<br>-->
+                <!--Unit Cost:-->
+                <!--<br>-->
+                <!--<input type="text" name="unit_cost" ng-model="invDetail.unit_cost">-->
+                <!--<br>-->
+                <!--Opening Balance:-->
+                <!--<br>-->
+                <!--<input type="text" name="opening_balance" ng-model="invDetail.opening_balance">-->
+                <!--<br>-->
+                <!--Dimension Length:-->
+                <!--<br>-->
+                <!--<input type="text" name="dim_length" ng-model="invDetail.dim_length">-->
+                <!--<br>-->
+                <!--Dimension Breadth:-->
+                <!--<br>-->
+                <!--<input type="text" name="dim_breadth" ng-model="invDetail.dim_breadth">-->
+                <!--<br>-->
+                <!--Dimension Height:-->
+                <!--<br>-->
+                <!--<input type="text" name="dim_height" ng-model="invDetail.dim_height">-->
+
+                <!--<br>-->
+                <!--<input type="submit" value="Submit">-->
+
+            <!--</div>-->
+
+        <!--</form>-->
+
+    <!--</div>-->
+
+
+</div>

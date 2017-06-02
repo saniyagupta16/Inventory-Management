@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="app" lang="en"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8" />
+    <title>Inventory Management</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <!--link rel="stylesheet" href="../static/css/stylesheet.css" th:href="@{css/stylesheet.css}" -->
+    <link  rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <!--script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+    <script type="text/javascript" src="static/js/app.js" th:src="@{/js/app.js}"></script>
+    <script type="text/javascript" src="static/js/inventoryController.js" th:src="@{/js/inventoryController.js}"></script>
+    <!--<script type="text/javascript" src="static/js/loginController.js" th:src="@{/js/loginController.js}"></script>-->
+    <script type="text/javascript" src="static/js/purchaseController.js" th:src="@{/js/purchaseController.js}"></script>
+    <script type="text/javascript" src="static/js/userController.js" th:src="@{/js/userController.js}"></script>
+    <script type="text/javascript" src="static/js/productionController.js" th:src="@{/js/productionController.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a  class="navbar-brand"   href="#">   Inventory Management</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#/home">Home</a></li>
+                    <li class="active"><a href="#/inventory">Inventory</a></li>
+                    <li class="active"><a href="#/purchase">Purchase Order</a></li>
+                    <li class="active"><a href="#/production">Production</a></li>
+                    <!--<li class="active"><a href="#/login">login</a></li>-->
+                    <li class="active"><a href="#/user">user</a></li>
+                    <li ng-show="authenticated"><a href="" ng-click="logout()">logout</a></li>
+
+                </ul>
+                <p  th:inline="text" class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">[[${#httpServletRequest.remoteUser}]]</a></p>
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out"/>
+                </form>
+            </div>
+
+
+        </div>
+    </nav>
+</header>
+
+
+<div class="main-content">
+    <ng-view></ng-view>
+</div>
+
+
+<!--footer class="footer" >
+    <div class="container">
+        <p  >dff</p>
+    </div>
+
+</footer-->
+</body>
+</html>

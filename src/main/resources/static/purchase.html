@@ -1,0 +1,82 @@
+
+<div class="col-lg-offset-2 col-lg-8"  ng-init="show='view'">
+    <div class="btn-group" role="group" >
+        <button ng-click="show='view'" type="button" class="btn btn-default">Purchase Order</button>
+        <button ng-click="show='add'" type="button" class="btn btn-default">Add Purchase Order</button>
+        <select id="itemSearch" ng-model="itemSearch" ng-change="refreshView(itemSearch)">
+            <option ng-value="0" >All</option>
+            <option ng-repeat="x in purchaseitem" ng-value="x.id" >{{x.name}}</option>
+        </select>
+
+
+    </div>
+    <div class="view purchaseorder" ng-if="show=='view'">
+        <table class="table">
+            <thead>
+            <tr>
+
+                <th>Vendor Name</th>
+                <th>Purchase Order Date</th>
+                <th>Total Cost</th>
+                <th>Tax(%)</th>
+                <th>Net Cost</th>
+                <th style="width:90px"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+
+            <tr ng-repeat ="purchaseorder in Order">
+                <td>{{purchaseorder.vendor_name}}</td>
+                <td>{{purchaseorder.purchase_order_date |  date:'MM/dd/yyyy'}}</td>
+                <td>{{purchaseorder.total_cost}}</td>
+                <td>{{purchaseorder.tax}}</td>
+                <td>{{purchaseorder.net_cost}}</td>
+
+                <td>
+                    <div>
+
+                        <button class="btn btn-danger" ng-click="deletePurchaseOrder(purchaseorder.purchase_order_number);">Delete</button>
+                    </div>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div class="add" ng-if="show=='add'">
+        <form id="addPurchaseOrder" name="test" method="post" ng-submit="addPurchaseOrder(purDetail);">
+            Vendor Name:<br><input type="text" name="vendor_name" ng-model="purDetail.vendor_name">
+            <br>
+            Purchase Order Date:
+            <br>
+            <input type="text" name="purchase_order_date" ng-model="purDetail.purchase_order_date">
+            <br>
+            <br>
+            <fieldset  data-ng-repeat="inventoryItems in pur.inventory_items">
+
+                <select id="itemDetail" ng-model="inventoryItems.purchaseId" >
+                    <option ng-repeat="x in purchaseitem" ng-value="x.id">{{x.name}}</option>
+                </select>
+                <input type="number" name="quantity" ng-model="inventoryItems.purchaseQty" placeholder="Enter Quantity">
+                <input type="button"  class="remove" ng-click="removeChoice($index)" value="-" />
+            </fieldset>
+            <input type="button" class="addfields" ng-click="addNewChoice(pur);" value="Add Items"/>
+
+            <br>
+
+            Tax(%):
+            <br>
+            <input type="text" name="tax" ng-model="purDetail.tax">
+            <br>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+ </div>
+

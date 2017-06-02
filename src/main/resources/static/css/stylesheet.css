@@ -1,0 +1,9 @@
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.modal-body{padding:15px 15px 0px 15px;}
+
+.modal-header{padding:0;border:none;}

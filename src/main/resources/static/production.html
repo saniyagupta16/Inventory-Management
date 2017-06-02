@@ -1,0 +1,80 @@
+
+<div class="col-lg-offset-2 col-lg-8"  ng-init="show='view'">
+    <div class="btn-group" role="group" >
+        <button ng-click="show='view'" type="button" class="btn btn-default">Production</button>
+        <button ng-click="show='add'" type="button" class="btn btn-default">Add Production</button>
+        <select id="itemSearch" ng-model="itemSearch" ng-change="refreshView(itemSearch)">
+            <option ng-value="0" >All</option>
+            <option ng-repeat="x in productionitem" ng-value="x.id" >{{x.name}}</option>
+        </select>
+
+
+    </div>
+    <div class="view production" ng-if="show=='view'">
+        <table class="table">
+            <thead>
+            <tr>
+
+                <th>Production Item</th>
+                <th>Production Date</th>
+                <th>Total Manufactured Item</th>
+                <th style="width:90px"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+
+            <tr ng-repeat ="productionorder in Order">
+                <td>{{productionorder.production_item}}</td>
+                <td>{{productionorder.production_date |  date:'MM/dd/yyyy'}}</td>
+                <td>{{productionorder.total_manufactured_item}}</td>
+
+
+                <td>
+                    <div>
+
+                        <button class="btn btn-danger" ng-click="deleteProduction(productionorder.production_number);">Delete</button>
+                    </div>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div class="add" ng-if="show=='add'">
+        <form id="addProduction" name="test" method="post" ng-submit="addProduction(proDetail);">
+            Production Item:
+            <br>
+            <select id="manufactured_item"  ng-model="proDetail.production_item">
+
+            <option ng-repeat= "x in productionitem " ng-value="x.name"> {{x.name}}</option>
+            </select>
+
+            <br>
+            Production Date:
+            <br>
+            <input type="text" name="production_date" ng-model="proDetail.production_date">
+            <br>
+            <br>
+            <fieldset  data-ng-repeat="inventoryItems in pur.production_inventory_items">
+
+                <select id="itemDetail" ng-model="productionInventoryItem.purchaseId" >
+                    <option ng-repeat="x in productionitem" ng-value="x.id">{{x.name}}</option>
+                </select>
+                <input type="number" name="quantity" ng-model="productionInventoryItem.purchaseQty" placeholder="Enter Quantity">
+                <input type="button"  class="remove" ng-click="removeChoice($index)" value="-" />
+            </fieldset>
+            <input type="button" class="addfields" ng-click="addNewChoice(pur);" value="Add Items"/>
+
+            <br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+</div>
+

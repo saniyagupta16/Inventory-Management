@@ -1,0 +1,120 @@
+
+<div class="col-lg-offset-2 col-lg-8"  ng-init="show='view'">
+    <div class="btn-group" role="group" >
+        <button ng-click="show='view'" type="button" class="btn btn-default">All</button>
+        <button ng-click="show='add'" type="button" class="btn btn-default">Add Item</button>
+    </div>
+    <div class="view inventory" ng-if="show=='view'">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Measurement Unit</th>
+                <th>Unit Cost</th>
+                <th>Opening Balance</th>
+                <th>Dimension Length</th>
+                <th>Dimension Breadth</th>
+                <th>Dimension Height</th>
+                <th>Dimension</th>
+                <th style="width:90px"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat ="inventoryDetail in inventory">
+                <td>{{inventoryDetail.name}}</td>
+                <td>{{inventoryDetail.unit_of_measurement}}</td>
+                <td>{{inventoryDetail.unit_cost}}</td>
+                <td>{{inventoryDetail.opening_balance}}</td>
+                <td>{{inventoryDetail.dim_length}}</td>
+                <td>{{inventoryDetail.dim_breadth}}</td>
+                <td>{{inventoryDetail.dim_height}}</td>
+                <td>{{inventoryDetail.dimension}}</td>
+                <td>
+                    <div>
+                        <button class="btn btn-danger" ng-click="edit(inventoryDetail);" >Edit</button>
+                        <button class="btn btn-danger" ng-click="delete(inventoryDetail.id);">Delete</button>
+                    </div>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div class="add" ng-if="show=='add'">
+        <form id="addForm" method="post" ng-submit="add(form);">
+            Item Name:<br><input type="text" name="name" ng-model="form.name">
+            <br>
+            Unit of Measurement:
+            <br>
+            <input type="text" name="unit_of_measurement" ng-model="form.unit_of_measurement">
+            <br>
+            Unit Cost:
+            <br>
+            <input type="text" name="unit_cost" ng-model="form.unit_cost">
+            <br>
+            Opening Balance:
+            <br>
+            <input type="text" name="opening_balance" ng-model="form.opening_balance">
+            <br>
+            Dimension Length:
+            <br>
+            <input type="text" name="dim_length" ng-model="form.dim_length">
+            <br>
+            Dimension Breadth:
+            <br>
+            <input type="text" name="dim_breadth" ng-model="form.dim_breadth">
+            <br>
+            Dimension Height:
+            <br>
+            <input type="text" name="dim_height" ng-model="form.dim_height">
+
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div id="editForm" ng-if="show=='edit'" >
+        <div class="modal-header">
+            <h3>Edit Inventory</h3>
+        </div>
+        <form id="edit" method="post" ng-submit="editInventory(invDetail);">
+            <div class="modal-body">
+                Item Name:<br><input type="text" name="name" ng-model="invDetail.name">
+                <br>
+                Unit of Measurement:
+                <br>
+                <input type="text" name="unit_of_measurement" ng-model="invDetail.unit_of_measurement">
+                <br>
+                Unit Cost:
+                <br>
+                <input type="text" name="unit_cost" ng-model="invDetail.unit_cost">
+                <br>
+                Opening Balance:
+                <br>
+                <input type="text" name="opening_balance" ng-model="invDetail.opening_balance">
+                <br>
+                Dimension Length:
+                <br>
+                <input type="text" name="dim_length" ng-model="invDetail.dim_length">
+                <br>
+                Dimension Breadth:
+                <br>
+                <input type="text" name="dim_breadth" ng-model="invDetail.dim_breadth">
+                <br>
+                Dimension Height:
+                <br>
+                <input type="text" name="dim_height" ng-model="invDetail.dim_height">
+
+                <br>
+                <input type="submit" value="Submit">
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+</div>
